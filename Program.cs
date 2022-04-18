@@ -6,6 +6,7 @@ namespace lab_4_2_1
     {
         public static void Main() // Хотела голова моя дурная сделать ООП, но что-то пошло не так. Сколько я его уже учу...
         {
+            Random rnd = new Random(); // Необходим лишь раз чисто для рандома.
             int arr_rows = 0, arr_columns = 0; //arr_rows - Кол-во строк массива, arr_columns - кол-во столбцов массива.
                                                // Что интересно. Далее по тексту я буду создавать массив. И пока я при инициализации не присвою значения данным переменным,
                                                // массив я не смогу объявить. Даже с учётом того, что я задал ввод с клавиатуры с присвоением значений.
@@ -30,19 +31,30 @@ namespace lab_4_2_1
             {
 
                 Console.Write("Choose your method: ");
-                choice = Convert.ToByte(Console.ReadLine());
+                choice = Convert.ToByte(Console.ReadLine()); // Тут конвертация не в Int32! 
+                Console.WriteLine();
 
                 switch (choice)
                 {
-                    case 1:
-                        Console.WriteLine("Test1");
+                    case 1: // Заполнение через рандом.
+                        Console.WriteLine("That's your array:");
+                        for (int i = 0; i < arr_rows; i++)
+                        {
+                            for (int j = 0; j < arr_columns; j++)
+                            {
+                                array[i, j] = rnd.Next(-256, 256); // Рандомизация значений.
+                                Console.Write($"{array[i, j], -6}"); // Красивый вывод.
+                            }
+                            Console.WriteLine();
+                        }
+                        Console.WriteLine();
                         break;
 
-                    case 2:
+                    case 2: // Заполнение через клавиатуру.
                         Console.WriteLine("Test2");
                         break;
 
-                    default:
+                    default: // Если пользователь де... неверно ввел ответ.
                         Console.WriteLine("Wrong answer! Let's try again...");
                         break;
                 }
