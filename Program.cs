@@ -11,7 +11,7 @@ namespace lab_4_2_1
               // Что интересно. Далее по тексту я буду создавать массив. И пока я при инициализации не присвою значения данным переменным,
               // массив я не смогу объявить. Даже с учётом того, что я задал ввод с клавиатуры с присвоением значений.
             byte choice = 0; // Пригодится для switch-case
-            int row_count = 0, zero_count = 0; // Счетчик нулевых элементов и строк без нулевых элементов.
+            int row_count = 0, zero_count = 0; // Счетчики нулевых элементов и строк без нулевых элементов.
 
             // Запрос у пользователя размера матрицы. Вначале строки, потом столбцы.
             Console.Write("Enter the number of rows in the array: ");
@@ -41,7 +41,10 @@ namespace lab_4_2_1
                         {
                             for (int j = 0; j < arr_columns; j++)
                             {
-                                array[i, j] = rnd.Next(-5, 5); // Рандомизация значений.                            
+                                array[i, j] = rnd.Next(-10, 11); // Рандомизация значений.
+                                                                 // Если представлять диапазон для рандомайзера на отрезке
+                                                                 // то он выглядит как-то так: [-10; 10). Поэтому справа 11, дабы 10
+                                                                 // было в рандоме.
                             }
                         }
                         break;
@@ -64,7 +67,6 @@ namespace lab_4_2_1
                         Console.WriteLine("Wrong answer! Let's try again...");
                         break;
                 }
-
             }
 
             Console.WriteLine("That's your array:"); // Красивый вывод.
@@ -83,7 +85,33 @@ namespace lab_4_2_1
             }
             Console.WriteLine($"\nArray has {row_count} rows without zero."); // И получаем красивый ответ по поводу безнулевых строк.
 
+            //Сортировка пузырьком. Медленная и тупая.
+            for (int i = 0; i < arr_rows; i++)
+            {
+                for (int j = 0; j < arr_columns; j++)
+                {
+                    for (int k = 0; k < arr_columns - 1; k++)
+                    {
+                        if (array[i, k] > array [i, k + 1])
+                        {
+                            int temp = array [i, k + 1];
+                            array [i, k + 1] = array [i, k];
+                            array [i, k] = temp;
+                        }
+                    }
+                }
+            }
 
+            Console.WriteLine("That's your sorted array:");
+            for (int i = 0; i < arr_rows; i++)
+            {
+                for (int j = 0; j < arr_columns; j++)
+                {
+                    Console.Write($"{array[i, j],-6}");
+                }
+                Console.WriteLine();
+            }
         }
     }
 }
+// Хотел бы я это сделать с ООП...
