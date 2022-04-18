@@ -44,7 +44,7 @@ namespace lab_4_2_1
                                 array[i, j] = rnd.Next(-5, 5); // Рандомизация значений.                            
                             }
                         }
-                            break;
+                        break;
 
                     case 2: // Заполнение через клавиатуру.
                         Console.WriteLine("Enter a value and press Enter.");
